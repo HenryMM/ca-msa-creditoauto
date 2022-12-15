@@ -4,9 +4,9 @@ using creditoauto.Infraestructure.Services;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
 
-namespace creditoauto.Test.Services
+namespace creditoauto.Test.Infraestructura.Services
 {
-    public class ClienteServicioTest
+    public class ClienteInfraestructuraTest
     {
 
         [Test]
@@ -25,6 +25,7 @@ namespace creditoauto.Test.Services
             #endregion
 
             #region Assert
+
             Assert.That(ex.Message == "La ubicación del archivo es invalida");
             #endregion
         }
@@ -74,7 +75,7 @@ namespace creditoauto.Test.Services
                     Identificacion = "178888889"
                 }
             });
-            var clientes =  await clienteService.CargaInicialAsync();
+            var clientes = await clienteService.CargaInicialAsync();
             #endregion
 
             #region Assert

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\creditoauto.Common\creditoauto.Common.csproj" />
     <ProjectReference Include="..\creditoauto.Domain\creditoauto.Domain.csproj" />
   </ItemGroup>
 

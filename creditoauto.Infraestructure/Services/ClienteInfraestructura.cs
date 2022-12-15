@@ -1,4 +1,5 @@
-﻿using creditoauto.Domain.Interfaces;
+﻿using creditoauto.Common;
+using creditoauto.Domain.Interfaces;
 using creditoauto.Entity.DTO;
 using creditoauto.Entity.Models;
 using Microsoft.Extensions.Configuration;
@@ -68,12 +69,12 @@ namespace creditoauto.Infraestructure.Services
             }
             return clientes;
         }
-
         #endregion
 
         #region Métodos Privados
         private List<Cliente> ObtenerClientes()
         {
+            FileHelper<Cliente> fileHelper = new FileHelper<Cliente>();
             string ubicacionArchivo = _config.GetSection("UbicacionArchivo").Value;
 
             if (string.IsNullOrEmpty(ubicacionArchivo))
@@ -81,9 +82,8 @@ namespace creditoauto.Infraestructure.Services
                 throw new ArgumentException("La ubicación del archivo es invalida");
             }
 
-            List<Cliente> clientes = LeerArchivo(ubicacionArchivo);
+            List<Cliente> clientes = fileHelper.LeerArchivoCSV<ClienteMap>(ubicacionArchivo);
 
-            return clientes;
         }
 
 
