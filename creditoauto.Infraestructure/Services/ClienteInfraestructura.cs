@@ -84,6 +84,7 @@ namespace creditoauto.Infraestructure.Services
 
             List<Cliente> clientes = fileHelper.LeerArchivoCSV<ClienteMap>(ubicacionArchivo);
 
+            return clientes;
         }
 
 
