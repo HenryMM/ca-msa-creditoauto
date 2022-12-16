@@ -17,7 +17,7 @@ namespace creditoauto.API.Controllers
             _ejecutivoInfraestructura = clienteService;
         }
 
-        [HttpPost]
+        [HttpPost("CargaInicial")]
         public async Task<IActionResult> CargaInicial()
         {
             RespuestaGenerica<List<Ejecutivo>> result = await _ejecutivoInfraestructura.CargaInicialAsync();

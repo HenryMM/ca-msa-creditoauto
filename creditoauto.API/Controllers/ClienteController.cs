@@ -18,10 +18,18 @@ namespace creditoauto.API.Controllers
             _clienteService = clienteService;
         }
 
-        [HttpPost]
+        [HttpPost("CargaInicial")]
         public async Task<IActionResult> CargaInicial()
         {
             RespuestaGenerica<List<Cliente>> result = await _clienteService.CargaInicialAsync();
+
+            return Ok(result);
+        }
+
+        [HttpPost("AsignarPatio")]
+        public async Task<IActionResult> AsignarPatio(ClientePatio clientePatio)
+        {
+            RespuestaGenerica<ClientePatio> result = await _clienteService.AsignarPatio(clientePatio);
 
             return Ok(result);
         }

@@ -17,7 +17,7 @@ namespace creditoauto.API.Controllers
             _marcaService = marcaService;
         }
 
-        [HttpPost]
+        [HttpPost("CargaInicial")]
         public async Task<IActionResult> CargaInicial()
         {
             RespuestaGenerica<List<Marca>> result = await _marcaService.CargaInicialAsync();

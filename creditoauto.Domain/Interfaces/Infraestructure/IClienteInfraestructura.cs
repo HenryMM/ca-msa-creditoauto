@@ -7,5 +7,6 @@ namespace creditoauto.Domain.Interfaces.Infraestructure
     {
         Task<RespuestaGenerica<List<Cliente>>> CargaInicialAsync();
         Task<List<Cliente>> CrearClientesAsync(List<Cliente> clientes);
+        Task<RespuestaGenerica<ClientePatio>> AsignarPatio(ClientePatio clientePatio);
     }
 }

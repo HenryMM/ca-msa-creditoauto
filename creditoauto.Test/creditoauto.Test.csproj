@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="Moq" Version="4.18.3" />
     <PackageReference Include="MSTest.TestFramework" Version="3.0.0" />
@@ -23,6 +25,7 @@
     <ProjectReference Include="..\creditoauto.Domain\creditoauto.Domain.csproj" />
     <ProjectReference Include="..\creditoauto.Entity\creditoauto.Entity.csproj" />
     <ProjectReference Include="..\creditoauto.Infraestructure\creditoauto.Infraestructure.csproj" />
+    <ProjectReference Include="..\creditoauto.Repository\creditoauto.Repository.csproj" />
   </ItemGroup>
 
 </Project>

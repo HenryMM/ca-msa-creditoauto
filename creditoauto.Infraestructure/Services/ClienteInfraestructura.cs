@@ -11,12 +11,17 @@ namespace creditoauto.Infraestructure.Services
     {
 
         private IRepository<Cliente> _repositoryCliente;
+        private IRepository<ClientePatio> _repositoryClientePatio;
         private readonly IFileHelper<Cliente> _fileHelper;
         private readonly IConfiguration _config;
 
-        public ClienteInfraestructura(IRepository<Cliente> repositoryCliente, IConfiguration config, IFileHelper<Cliente> fileHelper)
+        public ClienteInfraestructura(IRepository<Cliente> repositoryCliente,
+            IRepository<ClientePatio> repositoryClientePatio,
+            IConfiguration config, 
+            IFileHelper<Cliente> fileHelper)
         {
             _repositoryCliente = repositoryCliente;
+            _repositoryClientePatio = repositoryClientePatio;
             _config = config;
             _fileHelper = fileHelper;
         }
@@ -35,10 +40,20 @@ namespace creditoauto.Infraestructure.Services
 
         public async Task<List<Cliente>> CrearClientesAsync(List<Cliente> clientes)
         {
-
             await _repositoryCliente.CreateEntitiesAsync(clientes);
             await _repositoryCliente.SaveAsync();
             return clientes;
+        }
+
+        public async Task<RespuestaGenerica<ClientePatio>> AsignarPatio(ClientePatio clientePatio)
+        {
+            await _repositoryClientePatio.CreateEntityAsync(clientePatio);
+            await _repositoryClientePatio.SaveAsync();
+            return new RespuestaGenerica<ClientePatio>
+            {
+                Data = clientePatio,
+                IsSuccessfull = true
+            };
         }
         #endregion
 

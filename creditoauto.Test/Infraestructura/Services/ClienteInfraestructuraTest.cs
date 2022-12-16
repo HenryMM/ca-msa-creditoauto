@@ -1,14 +1,15 @@
-﻿using creditoauto.Domain.Interfaces;
+﻿using creditoauto.Common.ClassMaps;
+using creditoauto.Common;
+using creditoauto.Domain.Interfaces;
 using creditoauto.Entity.Models;
-using creditoauto.Infraestructure.Services;
-using Microsoft.Extensions.Configuration;
-using NSubstitute;
+using Moq;
+
 
 namespace creditoauto.Test.Infraestructura.Services
 {
     public class ClienteInfraestructuraTest
     {
 
-       
+      
     }
 }

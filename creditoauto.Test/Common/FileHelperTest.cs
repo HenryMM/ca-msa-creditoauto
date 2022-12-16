@@ -1,5 +1,5 @@
-﻿using Castle.Core.Configuration;
-using creditoauto.Common;
+﻿using creditoauto.Common;
+using creditoauto.Common.ClassMaps;
 using creditoauto.Domain.Interfaces;
 using creditoauto.Entity.Models;
 using Moq;
