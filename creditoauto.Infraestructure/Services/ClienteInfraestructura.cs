@@ -1,4 +1,4 @@
-﻿using creditoauto.Common;
+﻿using creditoauto.Common.ClassMaps;
 using creditoauto.Domain.Interfaces;
 using creditoauto.Entity.DTO;
 using creditoauto.Entity.Models;
@@ -6,16 +6,18 @@ using Microsoft.Extensions.Configuration;
 
 namespace creditoauto.Infraestructure.Services
 {
-    public class ClienteInfraestructura : IClienteService
+    public class ClienteInfraestructura : IClienteInfraestructura
     {
 
         private IRepository<Cliente> _repositoryCliente;
+        private readonly IFileHelper<Cliente> _fileHelper;
         private readonly IConfiguration _config;
 
-        public ClienteInfraestructura(IRepository<Cliente> repositoryCliente, IConfiguration config)
+        public ClienteInfraestructura(IRepository<Cliente> repositoryCliente, IConfiguration config, IFileHelper<Cliente> fileHelper)
         {
             _repositoryCliente = repositoryCliente;
             _config = config;
+            _fileHelper = fileHelper;
         }
 
         #region Métodos Públicos
@@ -37,47 +39,14 @@ namespace creditoauto.Infraestructure.Services
             await _repositoryCliente.SaveAsync();
             return clientes;
         }
-
-        public List<Cliente> LeerArchivo(string ubicacionArchivo)
-        {
-            List<Cliente> clientes = new List<Cliente>();
-            using (StreamReader archivo = new StreamReader(ubicacionArchivo))
-            {
-                archivo.ReadLine();
-                string fila;
-                while ((fila = archivo.ReadLine()) != null)
-                {
-                    Console.WriteLine(fila);
-                    string[] datosCliente = fila.Split(";");
-                    var cliente = new Cliente
-                    {
-                        Identificacion = datosCliente[0],
-                        Nombres = datosCliente[1],
-                        Edad = int.Parse(datosCliente[2]),
-                        FechaNacimiento = DateTime.Parse(datosCliente[3]),
-                        Apellidos = datosCliente[4],
-                        Direccion = datosCliente[5],
-                        Telefono = datosCliente[6],
-                        EstadoCivil = datosCliente[7],
-                        IdentificacionConyuge = datosCliente[8],
-                        NombreConyuge = datosCliente[9],
-                        SujetoCredito = datosCliente[10]
-                    };
-                    clientes.Add(cliente);
-                }
-                clientes = clientes.DistinctBy(x => x.Identificacion).ToList();
-            }
-            return clientes;
-        }
         #endregion
 
         #region Métodos Privados
         private List<Cliente> ObtenerClientes()
         {
-            FileHelper<Cliente> fileHelper = new FileHelper<Cliente>();
-            string ubicacionArchivo = _config.GetSection("UbicacionArchivo").Value;
+            string ubicacionArchivo = _config.GetSection("UbicacionArchivoClientes").Value;
 
-            List<Cliente> clientes = fileHelper.LeerArchivoCSV<ClienteMap>(ubicacionArchivo);
+            List<Cliente> clientes = _fileHelper.LeerArchivoCSV<ClienteMap>(ubicacionArchivo);
 
             if(clientes.Count > 1)
             {

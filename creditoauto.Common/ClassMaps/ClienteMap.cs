@@ -1,7 +1,7 @@
 ﻿using creditoauto.Entity.Models;
 using CsvHelper.Configuration;
 
-namespace creditoauto.Common
+namespace creditoauto.Common.ClassMaps
 {
     public class ClienteMap : ClassMap<Cliente>
     {

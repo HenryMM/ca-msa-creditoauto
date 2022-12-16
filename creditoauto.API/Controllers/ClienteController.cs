@@ -10,9 +10,9 @@ namespace creditoauto.API.Controllers
     public class ClienteController : ControllerBase
     {
 
-        private IClienteService _clienteService;
+        private IClienteInfraestructura _clienteService;
 
-        public ClienteController(IClienteService clienteService)
+        public ClienteController(IClienteInfraestructura clienteService)
         {
             _clienteService = clienteService;
         }

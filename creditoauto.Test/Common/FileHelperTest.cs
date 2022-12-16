@@ -2,7 +2,9 @@
 using creditoauto.Common;
 using creditoauto.Domain.Interfaces;
 using creditoauto.Entity.Models;
+using Moq;
 using NSubstitute;
+using System.Text;
 
 namespace creditoauto.Test.Common
 {
@@ -13,9 +15,8 @@ namespace creditoauto.Test.Common
         {
             #region Arrange
             string ubicacionArchivo = null;
-            var _config = Substitute.For<IConfiguration>();
-            var _repositoryCliente = Substitute.For<IRepository<Cliente>>();
-            IFileHelper<Cliente> _fileHelper = new FileHelper<Cliente>();
+            var _fileManager = new Mock<IFileManager>();
+            IFileHelper<Cliente> _fileHelper = new FileHelper<Cliente>(_fileManager.Object);
             #endregion
 
             #region Act
@@ -33,9 +34,8 @@ namespace creditoauto.Test.Common
         {
             #region Arrange
             string ubicacionArchivo = string.Empty;
-            var _config = Substitute.For<IConfiguration>();
-            var _repositoryCliente = Substitute.For<IRepository<Cliente>>();
-            IFileHelper<Cliente> _fileHelper = new FileHelper<Cliente>();
+            var _fileManager = new Mock<IFileManager>();
+            IFileHelper<Cliente> _fileHelper = new FileHelper<Cliente>(_fileManager.Object);
             #endregion
 
             #region Act
@@ -48,37 +48,44 @@ namespace creditoauto.Test.Common
             #endregion
         }
 
-        //[Test]
-        //public async Task CargaInicialAsync_UbicacionArchivoEsCorrecto_GuardarClientes()
-        //{
-        //    #region Arrange
-        //    string ubicacionArchivo = "C:\\Users\\UbicacionCorrecta";
-        //    var _config = Substitute.For<IConfiguration>();
-        //    var _repositoryCliente = Substitute.For<IRepository<Cliente>>();
-        //    IClienteService clienteService = new ClienteInfraestructura(_repositoryCliente, _config);
-        //    #endregion
+        [Test]
+        public void CargaInicialAsync_UbicacionArchivoEsInvalido_ThrowArgumentNullException()
+        {
+            #region Arrange
+            string ubicacionArchivo = "C:\\Users\\PC\\UbicacionIncorrecta";
+            var _fileManager = new Mock<IFileManager>();
+            IFileHelper<Cliente> _fileHelper = new FileHelper<Cliente>(_fileManager.Object);
+            #endregion
 
-        //    #region Act
-        //    _config.GetSection("UbicacionArchivo").Value.Returns(ubicacionArchivo);
-        //    clienteService.LeerArchivo(ubicacionArchivo).Returns(new List<Cliente>
-        //    {
-        //        new Cliente
-        //        {
-        //            Id= 1,
-        //            Identificacion = "178888888"
-        //        },
-        //        new Cliente
-        //        {
-        //            Id= 12,
-        //            Identificacion = "178888889"
-        //        }
-        //    });
-        //    var clientes = await clienteService.CargaInicialAsync();
-        //    #endregion
+            #region Act
+            var ex = Assert.Throws<ArgumentNullException>(() => _fileHelper.LeerArchivoCSV<ClienteMap>(ubicacionArchivo));
+            #endregion
 
-        //    #region Assert
-        //    Assert.IsNotNull(clientes);
-        //    #endregion
-        //}
+            #region Assert
+            Assert.That(ex.Message == "Value cannot be null. (Parameter 'reader')");
+            #endregion
+        }
+
+        [Test]
+        public void CargaInicialAsync_UbicacionArchivoValido_ThrowArgumentException()
+        {
+            #region Arrange
+            string ubicacionArchivo = "C:\\Users\\PC\\UbicacionCorrecta";
+            var _fileManager = new Mock<IFileManager>();
+            IFileHelper<Cliente> _fileHelper = new FileHelper<Cliente>(_fileManager.Object);
+            #endregion
+
+            #region Act
+            StringBuilder stringBuilder = new StringBuilder("Test");
+            MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(stringBuilder.ToString()));
+            _fileManager.Object.StreamReader(ubicacionArchivo).Returns(new StreamReader(memoryStream));
+            var actual = _fileHelper.LeerArchivoCSV<ClienteMap>(ubicacionArchivo);
+            #endregion
+
+            #region Assert
+
+            //Assert.That(ex.Message == "La ubicación del archivo es inválida");
+            #endregion
+        }
     }
 }

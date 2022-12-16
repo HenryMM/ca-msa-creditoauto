@@ -14,5 +14,7 @@ namespace creditoauto.Repository.Context
         }
 
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Marca> Marcas { get; set; }
+        public DbSet<Patio> Patios { get; set; }
     }
 }

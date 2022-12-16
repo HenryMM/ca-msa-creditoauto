@@ -1,3 +1,4 @@
+using creditoauto.Common;
 using creditoauto.Domain.Interfaces;
 using creditoauto.Infraestructure.Services;
 using creditoauto.Repository.Context;
@@ -16,9 +17,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddTransient<IClienteService, ClienteInfraestructura>();
+builder.Services.AddTransient<IClienteInfraestructura, ClienteInfraestructura>();
+builder.Services.AddTransient<IMarcaInfraestructura, MarcaInfraestructura>();
+builder.Services.AddTransient(typeof(IFileHelper<>), typeof(FileHelper<>));
+builder.Services.AddTransient<IFileManager, FileManager>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
 
 var app = builder.Build();
 
