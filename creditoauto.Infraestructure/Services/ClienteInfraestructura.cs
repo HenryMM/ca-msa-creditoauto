@@ -77,17 +77,15 @@ namespace creditoauto.Infraestructure.Services
             FileHelper<Cliente> fileHelper = new FileHelper<Cliente>();
             string ubicacionArchivo = _config.GetSection("UbicacionArchivo").Value;
 
-            if (string.IsNullOrEmpty(ubicacionArchivo))
-            {
-                throw new ArgumentException("La ubicación del archivo es invalida");
-            }
-
             List<Cliente> clientes = fileHelper.LeerArchivoCSV<ClienteMap>(ubicacionArchivo);
+
+            if(clientes.Count > 1)
+            {
+                clientes = clientes.DistinctBy(x=>x.Identificacion).ToList();
+            }
 
             return clientes;
         }
-
-
 
         #endregion
     }

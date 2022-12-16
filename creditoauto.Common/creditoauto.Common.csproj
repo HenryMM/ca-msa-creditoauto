@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\creditoauto.Domain\creditoauto.Domain.csproj" />
     <ProjectReference Include="..\creditoauto.Entity\creditoauto.Entity.csproj" />
   </ItemGroup>
 

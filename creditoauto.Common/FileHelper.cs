@@ -1,4 +1,5 @@
-﻿using CsvHelper;
+﻿using creditoauto.Domain.Interfaces;
+using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
 
@@ -8,16 +9,20 @@ namespace creditoauto.Common
     /// Permite leer archivos externos.
     /// </summary>
     /// <typeparam name="T">El tipo de objeto que va a devolver un método</typeparam>
-    public class FileHelper<T> where T : class
+    public class FileHelper<T> : IFileHelper<T> where T : class
     {
         /// <summary>
-        /// Permite leer un archivo archivo CSV y devolver un listado con la información proporcionada.
+        /// Permite leer un archivo archivo CSV y devolver un listado de tipo T con la información obtenida.
         /// </summary>
         /// <typeparam name="K">Class Map</typeparam>
         /// <param name="ubicacionArchivo">La ubicación fisica del archivo</param>
         /// <returns>Un listado de tipo T</returns>
-        public List<T> LeerArchivoCSV<K>(string ubicacionArchivo) where K : ClassMap
+        public List<T> LeerArchivoCSV<K>(string? ubicacionArchivo) where K : ClassMap
         {
+            if (string.IsNullOrEmpty(ubicacionArchivo))
+            {
+                throw new ArgumentException("La ubicación del archivo es inválida");
+            }
             List<T> records = new List<T>();
             using (var streamReader = new StreamReader(ubicacionArchivo))
             {
