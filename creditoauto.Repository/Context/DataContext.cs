@@ -11,10 +11,13 @@ namespace creditoauto.Repository.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Ejecutivo>()
+            .Ignore(e=>e.CodigoPatio);
         }
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Marca> Marcas { get; set; }
         public DbSet<Patio> Patios { get; set; }
+        public DbSet<Ejecutivo> Ejecutivos { get; set; }
     }
 }

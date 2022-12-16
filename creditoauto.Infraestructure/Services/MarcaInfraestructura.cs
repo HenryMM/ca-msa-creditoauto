@@ -1,14 +1,10 @@
 ﻿using creditoauto.Common;
 using creditoauto.Common.ClassMaps;
 using creditoauto.Domain.Interfaces;
+using creditoauto.Domain.Interfaces.Infraestructure;
 using creditoauto.Entity.DTO;
 using creditoauto.Entity.Models;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace creditoauto.Infraestructure.Services
 {

@@ -7,20 +7,20 @@ namespace creditoauto.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class MarcaController : ControllerBase
+    public class EjecutivoController : ControllerBase
     {
 
-        private IMarcaInfraestructura _marcaService;
+        private IEjecutivoInfraestructura _ejecutivoInfraestructura;
 
-        public MarcaController(IMarcaInfraestructura marcaService)
+        public EjecutivoController(IEjecutivoInfraestructura clienteService)
         {
-            _marcaService = marcaService;
+            _ejecutivoInfraestructura = clienteService;
         }
 
         [HttpPost]
         public async Task<IActionResult> CargaInicial()
         {
-            RespuestaGenerica<List<Marca>> result = await _marcaService.CargaInicialAsync();
+            RespuestaGenerica<List<Ejecutivo>> result = await _ejecutivoInfraestructura.CargaInicialAsync();
 
             return Ok(result);
         }

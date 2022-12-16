@@ -1,4 +1,5 @@
 using creditoauto.Domain.Interfaces;
+using creditoauto.Domain.Interfaces.Infraestructure;
 using creditoauto.Entity.DTO;
 using creditoauto.Entity.Models;
 using Microsoft.AspNetCore.Mvc;

@@ -1,5 +1,6 @@
 using creditoauto.Common;
 using creditoauto.Domain.Interfaces;
+using creditoauto.Domain.Interfaces.Infraestructure;
 using creditoauto.Infraestructure.Services;
 using creditoauto.Repository.Context;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IClienteInfraestructura, ClienteInfraestructura>();
 builder.Services.AddTransient<IMarcaInfraestructura, MarcaInfraestructura>();
+builder.Services.AddTransient<IEjecutivoInfraestructura, EjecutivoInfraestructura>();
 builder.Services.AddTransient(typeof(IFileHelper<>), typeof(FileHelper<>));
 builder.Services.AddTransient<IFileManager, FileManager>();
 

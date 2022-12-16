@@ -1,7 +1,7 @@
 ﻿using creditoauto.Entity.DTO;
 using creditoauto.Entity.Models;
 
-namespace creditoauto.Domain.Interfaces
+namespace creditoauto.Domain.Interfaces.Infraestructure
 {
     public interface IClienteInfraestructura
     {
