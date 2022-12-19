@@ -11,6 +11,7 @@ namespace creditoauto.Domain.Interfaces
         Task<IEnumerable<T>> CreateEntitiesAsync(IEnumerable<T> entity);
         Task<T> UpdateEntityAsync(T entity);
         Task<int> SaveAsync();
+        Task DeleteEntityAsync(int id);
 
 
     }

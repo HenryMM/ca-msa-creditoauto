@@ -27,6 +27,50 @@ namespace creditoauto.Infraestructure.Services
         }
 
         #region Métodos Públicos
+
+        public async Task<RespuestaGenerica<Cliente>> ObtenerClienteAsync( int clienteId)
+        {
+            Cliente cliente = await _repositoryCliente.GetEntityByIdAsync(clienteId);
+            return new RespuestaGenerica<Cliente>
+            {
+                Data = cliente,
+                IsSuccessfull = true
+            };
+        }
+        public async Task<RespuestaGenerica<Cliente>> CrearClienteAsync(Cliente cliente)
+        {
+            await _repositoryCliente.CreateEntityAsync(cliente);
+            await _repositoryCliente.SaveAsync();
+            return new RespuestaGenerica<Cliente>
+            {
+                Data = cliente,
+                IsSuccessfull = true
+            };
+
+        }
+
+        public async Task<RespuestaGenerica<Cliente>> ActualizarClienteAsync(Cliente cliente)
+        {
+            await _repositoryCliente.UpdateEntityAsync(cliente);
+            await _repositoryCliente.SaveAsync();
+            return new RespuestaGenerica<Cliente>
+            {
+                Data = cliente,
+                IsSuccessfull = true
+            };
+        }
+
+        public async Task<RespuestaGenerica<string>> EliminarClienteAsync(int idCliente)
+        {
+            await _repositoryCliente.DeleteEntityAsync(idCliente);
+            await _repositoryCliente.SaveAsync();
+            return new RespuestaGenerica<string>
+            {
+                Data = "Ok",
+                IsSuccessfull = true
+            };
+        }
+
         public async Task<RespuestaGenerica<List<Cliente>>> CargaInicialAsync()
         {
             List<Cliente> clientes = ObtenerClientes();
