@@ -6,12 +6,6 @@ using Moq;
 using creditoauto.Domain.Interfaces.Infraestructure;
 using creditoauto.Infraestructure.Services;
 using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.Reflection.Metadata;
-using Microsoft.EntityFrameworkCore;
-using NSubstitute;
-using creditoauto.Repository.Context;
-using System.Data.Entity.Infrastructure;
 using System.Linq.Expressions;
 
 namespace creditoauto.Test.Infraestructura.Services

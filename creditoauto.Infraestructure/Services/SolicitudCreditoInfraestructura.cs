@@ -84,7 +84,7 @@ namespace creditoauto.Infraestructure.Services
                 {
                     Data = null,
                     IsSuccessfull = false,
-                    Mensaje = "El vehiculo tiene una solicitud registrada. No puede ser vendido. "
+                    Mensaje = "El vehiculo tiene una solicitud registrada. No puede ser vendido."
                 };
             }
             return new RespuestaGenerica<SolicitudCredito> { IsSuccessfull = true };

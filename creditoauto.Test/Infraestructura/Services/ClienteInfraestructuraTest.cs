@@ -10,6 +10,6 @@ namespace creditoauto.Test.Infraestructura.Services
     public class ClienteInfraestructuraTest
     {
 
-      
+        
     }
 }
