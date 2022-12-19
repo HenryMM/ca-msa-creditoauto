@@ -24,5 +24,6 @@ namespace creditoauto.API.Controllers
 
             return Ok(result);
         }
+
     }
 }

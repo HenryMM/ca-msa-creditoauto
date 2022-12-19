@@ -14,5 +14,6 @@ namespace creditoauto.Entity.Models
         public string Celular { get; set; }
         public string Edad { get; set; }
         public int PatioId { get; set; }
+        public Patio Patio { get; set; }
     }
 }

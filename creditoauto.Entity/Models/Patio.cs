@@ -9,5 +9,6 @@ namespace creditoauto.Entity.Models
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string Codigo { get; set; }
+        public List<Ejecutivo> Ejecutivos { get; set; }
     }
 }
