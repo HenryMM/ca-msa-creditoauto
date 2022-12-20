@@ -3,8 +3,6 @@ using creditoauto.Domain.Interfaces;
 using creditoauto.Entity.Models;
 using creditoauto.Infraestructure.Services;
 using Moq;
-using NSubstitute;
-using System.Linq.Expressions;
 
 namespace creditoauto.Test.Infraestructura.Services
 {
