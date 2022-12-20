@@ -15,6 +15,17 @@ namespace creditoauto.Infraestructure.Services
         }
         public async Task<RespuestaGenerica<Vehiculo>> ActualizarVehiculoAsync(Vehiculo vehiculo)
         {
+            var queryResult = await _repositoryVehiculo.SearchByAsync(v => v.Placa == vehiculo.Placa);
+
+            if (queryResult.Count() > 0)
+            {
+                return new RespuestaGenerica<Vehiculo>
+                {
+                    Mensaje = "El vehiculo no fue modificado. Ya hay un vehiculo con la misma placa.",
+                    IsSuccessfull = false
+                };
+            }
+
             await _repositoryVehiculo.UpdateEntityAsync(vehiculo);
             await _repositoryVehiculo.SaveAsync();
             return new RespuestaGenerica<Vehiculo>
@@ -26,6 +37,17 @@ namespace creditoauto.Infraestructure.Services
 
         public async Task<RespuestaGenerica<Vehiculo>> CrearVehiculoAsync(Vehiculo vehiculo)
         {
+            var queryResult = await _repositoryVehiculo.SearchByAsync(v => v.Placa == vehiculo.Placa);
+
+            if (queryResult.Count() > 0)
+            {
+                return new RespuestaGenerica<Vehiculo>
+                {
+                    Mensaje = "El vehiculo no fue creado. Ya hay un vehiculo con la misma placa.",
+                    IsSuccessfull = false
+                };
+            }
+
             await _repositoryVehiculo.CreateEntityAsync(vehiculo);
             await _repositoryVehiculo.SaveAsync();
             return new RespuestaGenerica<Vehiculo>
