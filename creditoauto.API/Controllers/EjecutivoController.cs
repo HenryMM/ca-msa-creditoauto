@@ -11,15 +11,18 @@ namespace creditoauto.API.Controllers
     {
 
         private IEjecutivoInfraestructura _ejecutivoInfraestructura;
+        private readonly ILogger<ClienteController> _logger;
 
-        public EjecutivoController(IEjecutivoInfraestructura clienteService)
+        public EjecutivoController(IEjecutivoInfraestructura clienteService, ILogger<ClienteController> logger)
         {
             _ejecutivoInfraestructura = clienteService;
+            _logger = logger;
         }
 
         [HttpPost("CargaInicial")]
         public async Task<IActionResult> CargaInicial()
         {
+            _logger.LogInformation("Carga inicial de ejecutivos");
             RespuestaGenerica<List<Ejecutivo>> result = await _ejecutivoInfraestructura.CargaInicialAsync();
 
             return Ok(result);

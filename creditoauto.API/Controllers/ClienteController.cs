@@ -11,15 +11,18 @@ namespace creditoauto.API.Controllers
     {
 
         private IClienteInfraestructura _clienteService;
+        private readonly ILogger<ClienteController> _logger;
 
-        public ClienteController(IClienteInfraestructura clienteService)
+        public ClienteController(IClienteInfraestructura clienteService, ILogger<ClienteController> logger)
         {
             _clienteService = clienteService;
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<IActionResult> ObtenerCliente(int clienteId)
         {
+            _logger.LogInformation("Obtener cliente");
             RespuestaGenerica<Cliente> result = await _clienteService.ObtenerClienteAsync(clienteId);
 
             return Ok(result);
