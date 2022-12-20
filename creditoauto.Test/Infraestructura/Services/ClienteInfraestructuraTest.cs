@@ -4,6 +4,8 @@ using Moq;
 using creditoauto.Infraestructure.Services;
 using Microsoft.Extensions.Configuration;
 using System.Linq.Expressions;
+using creditoauto.Common.ClassMaps;
+using creditoauto.Domain.Interfaces.Infraestructure;
 
 namespace creditoauto.Test.Infraestructura.Services
 {
@@ -189,6 +191,104 @@ namespace creditoauto.Test.Infraestructura.Services
 
             //Assert
             Assert.IsTrue(actualResult.IsSuccessfull);
+        }
+
+        [Test]
+        public async Task CargaInicialAsync_IdentificacionesRepetidas_RemoverElementosDuplicados()
+        {
+            #region Arrange
+            string ubicacionArchivo = "C:\\Users\\PC\\UbicacionDefault";
+            int expectedCount = 2;
+            var _clienteRepository = new Mock<IRepository<Cliente>>();
+            var _clientePatioRepository = new Mock<IRepository<ClientePatio>>();
+            var _fileHelper = new Mock<IFileHelper<Cliente>>();
+            var _config = new Mock<IConfiguration>();
+
+            List<Cliente> clientesFake = new List<Cliente>
+            {
+                new Cliente
+                {
+                    Identificacion = "1",
+                    Nombres = "Juan Carlos",
+                },
+                new Cliente
+                {
+                    Identificacion = "2",
+                    Nombres = "Luis Paul"
+                },
+                new Cliente {
+                    Identificacion = "2",
+                    Nombres = "Luis Paul"
+                }
+            };
+
+            IQueryable<Patio> patiosFake = new List<Patio>
+            {
+                new Patio
+                {
+                    Id = 1,
+                    Nombre = "Patio1",
+                    Codigo = "PT1"
+                },
+                new Patio
+                {
+                    Id = 2,
+                    Nombre = "Patio2",
+                    Codigo = "PT2"
+                },
+                new Patio
+                {
+                    Id = 3,
+                    Nombre = "Patio3",
+                    Codigo = "PT3"
+                }
+            }.AsQueryable();
+
+            _config.Setup(p => p.GetSection(It.IsAny<string>()).Value).Returns(ubicacionArchivo);
+            _fileHelper.Setup(f => f.LeerArchivoCSV<ClienteMap>(It.IsAny<string>())).Returns(clientesFake);
+            
+
+            var target = new ClienteInfraestructura(_clienteRepository.Object,
+               _clientePatioRepository.Object, _config.Object, _fileHelper.Object);
+            #endregion
+
+            #region Act
+            var clientesResult = await target.CargaInicialAsync();
+            #endregion
+
+            #region Assert
+            Assert.That(expectedCount, Is.EqualTo(clientesResult.Data.Count));
+            #endregion
+        }
+
+        [Test]
+        public async Task CargaInicialAsync_CantidadClientesEsCero_ReturnListaVacia()
+        {
+            #region Arrange
+            string ubicacionArchivo = "C:\\Users\\PC\\UbicacionDefault";
+            int expectedCount = 0;
+            var _clienteRepository = new Mock<IRepository<Cliente>>();
+            var _clientePatioRepository = new Mock<IRepository<ClientePatio>>();
+            var _fileHelper = new Mock<IFileHelper<Cliente>>();
+            var _config = new Mock<IConfiguration>();
+
+            List<Cliente> clientesFake = new List<Cliente>{};
+
+            _config.Setup(p => p.GetSection(It.IsAny<string>()).Value).Returns(ubicacionArchivo);
+            _fileHelper.Setup(f => f.LeerArchivoCSV<ClienteMap>(It.IsAny<string>())).Returns(clientesFake);
+
+
+            var target = new ClienteInfraestructura(_clienteRepository.Object,
+               _clientePatioRepository.Object, _config.Object, _fileHelper.Object);
+            #endregion
+
+            #region Act
+            var clientesResult = await target.CargaInicialAsync();
+            #endregion
+
+            #region Assert
+            Assert.That(expectedCount, Is.EqualTo(clientesResult.Data.Count));
+            #endregion
         }
     }
 }

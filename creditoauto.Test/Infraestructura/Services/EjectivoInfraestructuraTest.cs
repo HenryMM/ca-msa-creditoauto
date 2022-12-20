@@ -22,8 +22,6 @@ namespace creditoauto.Test.Infraestructura.Services
             var _repositoryPatio = new Mock<IRepository<Patio>>();
             var _configuracion = new Mock<IConfiguration>();
             var _fileHelper = new Mock<IFileHelper<Ejecutivo>>();
-            IEjecutivoInfraestructura _ejecutivoInfraestructura = new EjecutivoInfraestructura(_repositoryEjecutivo.Object,
-                _repositoryPatio.Object, _configuracion.Object, _fileHelper.Object);
 
             List<Ejecutivo> ejecutivosFake = new List<Ejecutivo>
             {
@@ -72,6 +70,8 @@ namespace creditoauto.Test.Infraestructura.Services
             _fileHelper.Setup(f => f.LeerArchivoCSV<EjecutivoMap>(It.IsAny<string>())).Returns(ejecutivosFake);
             _repositoryPatio.Setup(p => p.SearchByAsync(It.IsAny<Expression<Func<Patio, bool>>>())).ReturnsAsync(patiosFake);
 
+            IEjecutivoInfraestructura _ejecutivoInfraestructura = new EjecutivoInfraestructura(_repositoryEjecutivo.Object,
+                _repositoryPatio.Object, _configuracion.Object, _fileHelper.Object);
             #endregion
 
             #region Act
@@ -93,8 +93,6 @@ namespace creditoauto.Test.Infraestructura.Services
             var _repositoryPatio = new Mock<IRepository<Patio>>();
             var _configuracion = new Mock<IConfiguration>();
             var _fileHelper = new Mock<IFileHelper<Ejecutivo>>();
-            IEjecutivoInfraestructura _ejecutivoInfraestructura = new EjecutivoInfraestructura(_repositoryEjecutivo.Object,
-                _repositoryPatio.Object, _configuracion.Object, _fileHelper.Object);
 
             List<Ejecutivo> ejecutivosFake = new List<Ejecutivo>{};
 
@@ -124,6 +122,8 @@ namespace creditoauto.Test.Infraestructura.Services
             _fileHelper.Setup(f => f.LeerArchivoCSV<EjecutivoMap>(It.IsAny<string>())).Returns(ejecutivosFake);
             _repositoryPatio.Setup(p => p.SearchByAsync(It.IsAny<Expression<Func<Patio, bool>>>())).ReturnsAsync(patiosFake);
 
+            IEjecutivoInfraestructura _ejecutivoInfraestructura = new EjecutivoInfraestructura(_repositoryEjecutivo.Object,
+                _repositoryPatio.Object, _configuracion.Object, _fileHelper.Object);
             #endregion
 
             #region Act
