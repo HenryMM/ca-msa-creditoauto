@@ -25,5 +25,6 @@ namespace creditoauto.Repository.Context
         public DbSet<Ejecutivo> Ejecutivos { get; set; }
         public DbSet<ClientePatio> ClientePatios { get; set; }
         public DbSet<SolicitudCredito> SolicitudCreditos { get; set; }
+        public DbSet<Vehiculo> Vehiculos { get; set; }
     }
 }

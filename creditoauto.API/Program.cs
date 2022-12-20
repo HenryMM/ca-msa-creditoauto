@@ -21,6 +21,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IClienteInfraestructura, ClienteInfraestructura>();
 builder.Services.AddTransient<IPatioInfraestructura, PatioInfraestructura>();
 builder.Services.AddTransient<IMarcaInfraestructura, MarcaInfraestructura>();
+builder.Services.AddTransient<IVehiculoInfraestructura, VehiculoInfraestructura>();
 builder.Services.AddTransient<IEjecutivoInfraestructura, EjecutivoInfraestructura>();
 builder.Services.AddTransient<ISolicitudCreditoInfraestructura, SolicitudCreditoInfraestructura>();
 builder.Services.AddTransient(typeof(IFileHelper<>), typeof(FileHelper<>));
