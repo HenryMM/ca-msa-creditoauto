@@ -39,6 +39,17 @@ namespace creditoauto.Infraestructure.Services
         }
         public async Task<RespuestaGenerica<Cliente>> CrearClienteAsync(Cliente cliente)
         {
+            var queryResult = await _repositoryCliente.SearchByAsync(v => v.Identificacion == cliente.Identificacion);
+
+            if (queryResult.Count() > 0)
+            {
+                return new RespuestaGenerica<Cliente>
+                {
+                    Mensaje = "El cliente no fue creado. El cliente ya existe.",
+                    IsSuccessfull = false
+                };
+            }
+
             await _repositoryCliente.CreateEntityAsync(cliente);
             await _repositoryCliente.SaveAsync();
             return new RespuestaGenerica<Cliente>
@@ -51,6 +62,17 @@ namespace creditoauto.Infraestructure.Services
 
         public async Task<RespuestaGenerica<Cliente>> ActualizarClienteAsync(Cliente cliente)
         {
+            var queryResult = await _repositoryCliente.SearchByAsync(v => v.Identificacion == cliente.Identificacion);
+
+            if (queryResult.Count() > 0)
+            {
+                return new RespuestaGenerica<Cliente>
+                {
+                    Mensaje = "El cliente no fue modificado. El cliente ya existe.",
+                    IsSuccessfull = false
+                };
+            }
+
             await _repositoryCliente.UpdateEntityAsync(cliente);
             await _repositoryCliente.SaveAsync();
             return new RespuestaGenerica<Cliente>
