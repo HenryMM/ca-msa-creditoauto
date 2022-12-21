@@ -80,6 +80,47 @@ namespace creditoauto.SharedDataBaseSetup
             context.AddRange(vehiculos);
             #endregion
 
+            #region Ejecutivo
+            context.Vehiculos.RemoveRange(context.Vehiculos);
+
+            var ejecutivoIds = 1;
+            var fakeEjecutivo = new Faker<Ejecutivo>()
+                .RuleFor(o => o.TelefonoConvencional, f => $"TelefonoConvencional {ejecutivoIds}")
+                .RuleFor(o => o.Identificacion, f => $"Identificacion {ejecutivoIds}")
+                .RuleFor(o => o.Apellidos, f => $"Apellidos {ejecutivoIds}")
+                .RuleFor(o => o.Celular, $"Celular {ejecutivoIds}")
+                .RuleFor(o => o.CodigoPatio, f => $"CodigoPatio, {ejecutivoIds}")
+                .RuleFor(o => o.Direccion, f => $"Direccion {ejecutivoIds}")
+                .RuleFor(o => o.Edad, f => $"Placa {ejecutivoIds}")
+                .RuleFor(o => o.Nombres, f => $"Nombres {ejecutivoIds}")
+                .RuleFor(o => o.Id, f => ejecutivoIds++);
+
+
+            var ejecutivos = fakeEjecutivo.Generate(10);
+
+            context.AddRange(ejecutivos);
+            #endregion
+
+            #region SolicitudCredito
+            context.Vehiculos.RemoveRange(context.Vehiculos);
+
+            var solicitudIds = 1;
+            var fakeSolicitud = new Faker<SolicitudCredito>()
+                .RuleFor(o => o.Entrada, f => 2000)
+                .RuleFor(o => o.Estado, f => $"Estado {solicitudIds}")
+                .RuleFor(o => o.Observacion, f => $"Observacion {solicitudIds}")
+                .RuleFor(o => o.EjecutivoId, 1)
+                .RuleFor(o => o.FechaElaboracion, f => DateTime.Now)
+                .RuleFor(o => o.MesesPlazo, f => 12)
+                .RuleFor(o => o.VehiculoId, f => 1)
+                .RuleFor(o => o.Id, f => solicitudIds++);
+
+
+            var solicitudes = fakeSolicitud.Generate(10);
+
+            context.AddRange(solicitudes);
+            #endregion
+
             context.SaveChanges();
         }
     }
