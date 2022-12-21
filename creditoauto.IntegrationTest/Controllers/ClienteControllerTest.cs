@@ -1,6 +1,7 @@
 ﻿using Azure;
 using Azure.Core;
 using creditoauto.Entity.DTO;
+using creditoauto.Entity.Enums;
 using creditoauto.Entity.Models;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Newtonsoft.Json;
@@ -129,10 +130,10 @@ namespace creditoauto.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task EliminarCliente_ReturnRecord()
+        public async Task EliminarCliente_ReturnMensaje()
         {
             //Arrange
-            string excpectedMensaje = "Ok";
+            string excpectedMensaje = Parametro.Eliminado;
             var client = this.GetNewClient();
 
             //Act

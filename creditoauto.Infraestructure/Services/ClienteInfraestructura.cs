@@ -2,6 +2,7 @@
 using creditoauto.Domain.Interfaces;
 using creditoauto.Domain.Interfaces.Infraestructure;
 using creditoauto.Entity.DTO;
+using creditoauto.Entity.Enums;
 using creditoauto.Entity.Models;
 using Microsoft.Extensions.Configuration;
 
@@ -88,7 +89,7 @@ namespace creditoauto.Infraestructure.Services
             await _repositoryCliente.SaveAsync();
             return new RespuestaGenerica<string>
             {
-                Data = "Ok",
+                Data = Parametro.Eliminado,
                 IsSuccessfull = true
             };
         }

@@ -1,4 +1,5 @@
 ﻿using creditoauto.Domain.Interfaces;
+using creditoauto.Entity.Enums;
 using creditoauto.Entity.Models;
 using creditoauto.Infraestructure.Services;
 using Moq;
@@ -171,7 +172,7 @@ namespace creditoauto.Test.Infraestructura.Services
             var vehiculo = await target.EliminarVehiculoAsync(1);
 
             //Assert
-            Assert.That(vehiculo.Data, Is.EqualTo("Ok"));
+            Assert.That(vehiculo.Data, Is.EqualTo(Parametro.Eliminado));
         }
     }
 }
