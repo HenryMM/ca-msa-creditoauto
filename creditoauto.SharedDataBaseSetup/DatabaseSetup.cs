@@ -6,8 +6,9 @@ namespace creditoauto.SharedDataBaseSetup
 {
     public static class DatabaseSetup
     {
-        public static void SeedData(DataContext context)
+        public static void SeetData(DataContext context)
         {
+            #region Clientes
             context.Clientes.RemoveRange(context.Clientes);
 
             var clienteIds = 1;
@@ -26,6 +27,23 @@ namespace creditoauto.SharedDataBaseSetup
             var clientes = fakeClientes.Generate(10);
 
             context.AddRange(clientes);
+            #endregion
+
+            #region Patio
+            context.Patios.RemoveRange(context.Patios);
+
+            var patioIds = 1;
+            var fakePatios = new Faker<Patio>()
+                .RuleFor(o => o.Codigo, f => $"Codigo {patioIds}")
+                .RuleFor(o => o.Descripcion, f => $"Descripcion {patioIds}")
+                .RuleFor(o => o.Nombre, f => $"Nombre {patioIds}")
+                .RuleFor(o => o.Id, f => patioIds++);
+                
+
+            var patios = fakePatios.Generate(10);
+
+            context.AddRange(patios);
+            #endregion
 
             context.SaveChanges();
         }

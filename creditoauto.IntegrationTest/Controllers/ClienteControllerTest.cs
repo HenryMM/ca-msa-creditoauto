@@ -1,9 +1,6 @@
-﻿using Azure;
-using Azure.Core;
-using creditoauto.Entity.DTO;
+﻿using creditoauto.Entity.DTO;
 using creditoauto.Entity.Enums;
 using creditoauto.Entity.Models;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Newtonsoft.Json;
 using System.Text;
 using Xunit;

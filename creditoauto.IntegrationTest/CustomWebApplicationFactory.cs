@@ -45,7 +45,7 @@ namespace creditoauto.IntegrationTest
 
                     try
                     {
-                        DatabaseSetup.SeedData(storeDbContext);
+                        DatabaseSetup.SeetData(storeDbContext);
                     }
                     catch (Exception ex)
                     {
@@ -72,7 +72,7 @@ namespace creditoauto.IntegrationTest
 
                     try
                     {
-                        DatabaseSetup.SeedData(storeDbContext);
+                        DatabaseSetup.SeetData(storeDbContext);
                     }
                     catch (Exception ex)
                     {
