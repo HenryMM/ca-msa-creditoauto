@@ -6,7 +6,7 @@ namespace creditoauto.SharedDataBaseSetup
 {
     public static class DatabaseSetup
     {
-        public static void SeetData(DataContext context)
+        public static void SeedData(DataContext context)
         {
             #region Clientes
             context.Clientes.RemoveRange(context.Clientes);
@@ -43,6 +43,41 @@ namespace creditoauto.SharedDataBaseSetup
             var patios = fakePatios.Generate(10);
 
             context.AddRange(patios);
+            #endregion
+
+            #region Marca
+            context.Marcas.RemoveRange(context.Marcas);
+
+            var marcaIds = 1;
+            var fakeMarca = new Faker<Marca>()
+                .RuleFor(o => o.Descripcion, f => $"Descripcion {marcaIds}")
+                .RuleFor(o => o.Nombre, f => $"Nombre {marcaIds}")
+                .RuleFor(o => o.Id, f => marcaIds++);
+
+
+            var marcas = fakeMarca.Generate(1);
+
+            context.AddRange(marcas);
+            #endregion
+
+            #region Vehiculo
+            context.Vehiculos.RemoveRange(context.Vehiculos);
+
+            var vehiculoIds = 1;
+            var fakeVehiculo = new Faker<Vehiculo>()
+                .RuleFor(o => o.Avaluo, f => 2000)
+                .RuleFor(o => o.NumeroChasis, f => $"NumeroChasis {vehiculoIds}")
+                .RuleFor(o => o.Cilindraje, f => $"Cilindraje {vehiculoIds}")
+                .RuleFor(o => o.MarcaId, 1)
+                .RuleFor(o => o.Tipo, f => $"Tipo, {vehiculoIds}")
+                .RuleFor(o => o.Modelo, f => $"Modelo {vehiculoIds}")
+                .RuleFor(o => o.Placa, f => $"Placa {vehiculoIds}")
+                .RuleFor(o => o.Id, f => vehiculoIds++);
+
+
+            var vehiculos = fakeVehiculo.Generate(10);
+
+            context.AddRange(vehiculos);
             #endregion
 
             context.SaveChanges();
