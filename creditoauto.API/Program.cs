@@ -78,4 +78,5 @@ finally
     NLog.LogManager.Shutdown();
 }
 
+public partial class Program { }
 

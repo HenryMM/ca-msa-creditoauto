@@ -2,11 +2,13 @@ using creditoauto.Domain.Interfaces.Infraestructure;
 using creditoauto.Entity.DTO;
 using creditoauto.Entity.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 
 namespace creditoauto.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Consumes(MediaTypeNames.Application.Json)]
     public class ClienteController : ControllerBase
     {
 

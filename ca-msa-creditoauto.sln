@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "creditoauto.Repository", "c
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "creditoauto.Test", "creditoauto.Test\creditoauto.Test.csproj", "{352E6761-569F-4218-9636-DEC1AD1F3C3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "creditoauto.Common", "creditoauto.Common\creditoauto.Common.csproj", "{16844879-27B9-447F-8044-14B8F6D67C7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "creditoauto.Common", "creditoauto.Common\creditoauto.Common.csproj", "{16844879-27B9-447F-8044-14B8F6D67C7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "creditoauto.IntegrationTest", "creditoauto.IntegrationTest\creditoauto.IntegrationTest.csproj", "{AFC30D04-0E5A-4259-A390-5CA244FA1FF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "creditoauto.SharedDataBaseSetup", "creditoauto.SharedDataBaseSetup\creditoauto.SharedDataBaseSetup.csproj", "{8FEC81EC-08B5-4A71-B703-0640603BD393}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{16844879-27B9-447F-8044-14B8F6D67C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16844879-27B9-447F-8044-14B8F6D67C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16844879-27B9-447F-8044-14B8F6D67C7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFC30D04-0E5A-4259-A390-5CA244FA1FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFC30D04-0E5A-4259-A390-5CA244FA1FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFC30D04-0E5A-4259-A390-5CA244FA1FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFC30D04-0E5A-4259-A390-5CA244FA1FF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FEC81EC-08B5-4A71-B703-0640603BD393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FEC81EC-08B5-4A71-B703-0640603BD393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FEC81EC-08B5-4A71-B703-0640603BD393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FEC81EC-08B5-4A71-B703-0640603BD393}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
